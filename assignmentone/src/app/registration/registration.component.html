@@ -1,0 +1,37 @@
+<div class="min-h-screen flex items-center justify-center px-4 text-center">
+  <div class="bg-gray-100 shadow-xl p-6 rounded-xl w-full max-w-sm">
+    <h3 class="text-xl font-bold">Registration</h3>
+    <form [formGroup]="user" (ngSubmit)="onSubmit()" class="space-y-4 text-left">
+      <div>
+        <label class="font-medium">Email</label>
+        <input type="email" formControlName="email" placeholder="Enter your email"
+          class="w-full border p-2 rounded" />
+        @if (user.get('email')?.touched) {
+        @if (user.get('email')?.hasError('required')) {
+        <p class="text-red-700 text-sm">email is required</p>
+        }
+        @if (user.get('email')?.hasError('email')) {
+        <p class="text-red-700 text-sm">enter a valid email</p>
+        }
+        }
+      </div>
+      <div>
+        <label class="font-medium">Password</label>
+        <input type="password" formControlName="password" placeholder="Enter your password"
+          class="w-full border p-2 rounded" />
+        @if (user.get('password')?.touched) {
+        @if (user.get('password')?.hasError('required')) {
+        <p class="text-red-700 text-sm">password is required</p>
+        }
+        @if (user.get('password')?.hasError('minlength')) {
+        <p class="text-red-700 text-sm">minimum 8 characters required</p>
+        }
+        }
+      </div>
+      <button type="submit" [disabled]="user.invalid"
+        class="w-full bg-blue-800 text-white p-2 rounded-lg disabled:bg-gray-300 mb-4">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

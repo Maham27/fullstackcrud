@@ -1,0 +1,6 @@
+<h1 class="text-center font-bold text-4xl my-16">SUBJECTS</h1>
+<div class="sub">
+    @for(s of subjectslist;track s.id){
+    <app-subjectlist [subj]="s"></app-subjectlist>
+    }
+</div>

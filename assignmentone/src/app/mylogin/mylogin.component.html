@@ -1,0 +1,35 @@
+<div class="min-h-screen flex items-center justify-center px-4 text-center">
+  <div class="bg-gray-100 p-6 shadow-xl rounded-xl w-full max-w-sm">
+    <h4 class="text-xl font-bold">Login</h4>
+    <form [formGroup]="person" (ngSubmit)="onSubmit()" class="space-y-4 text-left">
+      <div>
+        <label class="font-medium">Email</label>
+        <input type="email" formControlName="email" placeholder="Enter your email"
+          class="w-full border p-2 rounded-lg" />
+      @if (person.get('email')?.touched) {
+        @if (person.get('email')?.hasError('required')) {
+        <p class="text-red-700 text-sm">email is required</p>
+        }
+        @if (person.get('email')?.hasError('email')) {
+        <p class="text-red-700 text-sm">enter a valid email</p>
+        }
+        }
+      </div>
+      <div>
+        <label class="font-medium">Password</label>
+        <input type="password" formControlName="password" placeholder="Enter your password"
+          class="w-full border p-2 rounded-lg" />
+        @if (person.get('password')?.touched && person.get('password')?.hasError('required')) {
+        <p class="text-red-700 text-xs mt-1">password is required</p>
+        }
+      </div>
+      <button type="submit" [disabled]="person.invalid"
+        class="w-full bg-black text-white p-2 rounded-lg disabled:bg-gray-300 mb-2">
+        Submit
+      </button>
+    </form>
+    <a routerLink="/registration" class="text-blue-600 hover:underline">
+      Create an account
+    </a>
+  </div>
+</div>
