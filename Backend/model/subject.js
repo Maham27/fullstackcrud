@@ -1,8 +1,13 @@
-const { DataTypes } = require("sequelize");
-const {sequelize} = require("../config/db");
+const { Sequelize, DataTypes } = require('sequelize');
 
-const Subject = sequelize.define("Subject", {
-  name: { type: DataTypes.STRING, allowNull: false }
-});
-
+const {sequelize}=require('../config/db')
+const Subject = sequelize.define(
+  "Subject",
+  {
+    name: { type: DataTypes.STRING, allowNull: false }
+  },
+  {
+    tableName: "subjects"
+  }
+);
 module.exports = Subject;

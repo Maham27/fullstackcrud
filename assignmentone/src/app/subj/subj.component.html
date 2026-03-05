@@ -1,1 +1,6 @@
 <p>subj works!</p>
+ <h2>Create Subject</h2>
+    <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+      <input placeholder="Name" formControlName="name" />
+      <button type="submit" [disabled]="subjectForm.invalid">Create</button>
+    </form>

@@ -3,6 +3,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
 import { SubjectvideosComponent } from './subjectvideos/subjectvideos.component';
 import { MyloginComponent } from './mylogin/mylogin.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { SubjComponent } from './subj/subj.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,9 @@ export const routes: Routes = [
     },
     {
         path:'login',component:MyloginComponent
+    },
+    {
+        path:'subj',component:SubjComponent
     },
     {
     path: '**',
