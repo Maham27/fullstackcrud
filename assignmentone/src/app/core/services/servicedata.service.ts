@@ -1,59 +1,53 @@
 import { Injectable } from '@angular/core';
-import { Subject } from '../../models/subject';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Subj } from '../../models/subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicedataService {
 
-Subjectsdata: Subject[] = [
-  {
-    id: 1,
-    subjectname: 'Maths',
-    videos: [
-      { title: 'Lesson 1', url: 'assets/math/Mathlesson1.mp4' },
-      { title: 'Lesson 2', url: 'assets/math/Mathlesson2.mp4' },
-      { title: 'Lesson 3', url: 'assets/math/mathlesson3.mp4' }
-    ]
-  },
-
-  {
-    id: 2,
-    subjectname: 'English',
-    videos: [
-      { title: 'Lesson 1', url: 'assets/English/Englishlesson.mp4' },
-      { title: 'Lesson 2', url: 'assets/English/Englishlesson2.mp4' },
-      { title: 'Lesson 3', url: 'assets/English/Englishlesson3.mp4' }
-    ]
-  },
-
-  {
-    id: 3,
-    subjectname: 'Physics',
-    videos: [
-      { title: 'Lesson 1', url: 'assets/physics/physicslesson1.mp4' },
-      { title: 'Lesson 2', url: 'assets/physics/physicslesson2.mp4' },
-      { title: 'Lesson 3', url: 'assets/physics/physicslesson3.mp4' }
-    ]
-  }
-];
   private apiUrl = 'http://localhost:3000/api/subjects';
 
-  constructor(private http: HttpClient) {}
-createSubject(subject: any): Observable<any> {
-  return this.http.post(this.apiUrl, subject, {
-    headers: { 'Content-Type': 'application/json' }
-  });
+  constructor(private http: HttpClient) { }
+  createSubject(subject: any): Observable<Subj> {
+    return this.http.post<Subj>(this.apiUrl, subject);
+  }
+  getSubjects(): Observable<Subj[]> {
+    return this.http.get<Subj[]>(this.apiUrl);
+  }
+  getSubjectById(id: number): Observable<Subj> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Subj>(url);
+  }
+
+  updateSubject(id: number, subject: any): Observable<Subj> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put<Subj>(url, subject);
+  }
+  deleteSubject(id: number): Observable<void> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url);
+  }
+
+  createVideo(subjectId: number, video: FormData): Observable<any> {
+  const url = `${this.apiUrl}/${subjectId}/videos`;
+  return this.http.post(url, video);  // FormData directly post karenge
 }
 
+  getVideosBySubjectId(subjectId: number): Observable<any[]> {
+    const url = `${this.apiUrl}/${subjectId}/videos`;
+    return this.http.get<any[]>(url);
+  }
   
- getAllsubjects():Subject[]{
-  return this.Subjectsdata;
- }
- getvideosofsubject(id:number):Subject | undefined
-  {
-    return this.Subjectsdata.find((subj)=>subj.id===id)
-  }                        
+ updateVideo(subjectId: number, videoId: number, video: FormData): Observable<any> {
+  const url = `${this.apiUrl}/${subjectId}/videos/${videoId}`;
+  return this.http.put(url, video); // FormData directly PUT karenge
+}
+ 
+  deleteVideo(subjectId: number, videoId: number): Observable<void> {
+    const url = `${this.apiUrl}/${subjectId}/videos/${videoId}`;
+    return this.http.delete<void>(url);
+  }
 }

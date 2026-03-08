@@ -1,11 +1,21 @@
-<h3 class="font-bold text-4xl my-4 text-center my-10">{{subject?.subjectname}}</h3>
-<div class="vid mt-4 d-flex flex-row justify-content-evenly">
-      @for(video of subject?.videos; track $index){
-      <div class="text-center">
-            <video width="400" controls>
-                  <source [src]="video.url" type="video/mp4" />
-            </video>
-            <h5 class="text-2xl mt-3">{{video.title}}</h5>
-      </div>
-      }
-</div>
+<h3>{{ editingId ? 'Edit Video' : 'Add Video' }} for {{ subject?.name }}</h3>
+
+<form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="Video Title" formControlName="title" required />
+  <input type="file"  (change)="onFileSelected($event)" accept="video/*" [required]="!editingId" />
+  <button type="submit" [disabled]="videoForm.invalid">
+    {{ editingId ? 'Update Video' : 'Add Video' }}
+  </button>
+</form>
+
+<ul>
+  <li *ngFor="let video of videos">
+    <p>{{ video.title }}</p>
+    <video width="320" height="240" controls>
+      <source [src]="'http://localhost:3000' + video.url" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <button (click)="editVideo(video)">Edit</button>
+    <button (click)="deleteVideo(video.id)">Delete</button>
+  </li>
+</ul>

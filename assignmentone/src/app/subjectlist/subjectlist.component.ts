@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import { Subject } from '../models/subject';
+import { Input, Output, EventEmitter} from '@angular/core';
+import { Subj } from '../models/subject';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -11,5 +11,16 @@ import { RouterLink } from '@angular/router';
   styleUrl: './subjectlist.component.css'
 })
 export class SubjectlistComponent {
-  @Input() subj!:Subject;
+  @Input() subj!:Subj;
+   @Output() edit = new EventEmitter<Subj>();
+  @Output() delete = new EventEmitter<number>();
+
+  onEdit() {
+    this.edit.emit(this.subj);
+  }
+
+  onDelete() {
+    this.delete.emit(this.subj.id);
+  }
 }
+

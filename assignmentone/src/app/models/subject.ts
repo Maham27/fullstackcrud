@@ -1,14 +1,12 @@
-export interface Subject {
-    id:number;
-    subjectname:string;
-    videos:subvideo[];
+export interface Subj{
+    id: number;
+  name: string;
+  subjvid:subvideos[];
 }
 
-export interface subvideo{
-    title:string;
-    url:string;
-}
-
-export interface subj{
-    name:string;
+export interface subvideos{
+    id?: number;      
+  title: string;
+  url: string;
+  subjectId?: number;
 }
