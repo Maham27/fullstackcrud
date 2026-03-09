@@ -1,16 +1,14 @@
 <h1 class="text-center font-bold text-4xl my-16">SUBJECTS</h1>
 <h2>Create Subject</h2>
-    <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
-      <input placeholder="Name" formControlName="name" />
-     <button type="submit" [disabled]="subjectForm.invalid">
-    {{ editingId ? 'Update' : 'Create' }}
+<form [formGroup]="subjectform" (ngSubmit)="onSubmit()">
+  <input placeholder="Name" formControlName="name" />
+  <button type="submit" [disabled]="subjectform.invalid">
+    {{ editingid ? 'Update' : 'Create' }}
   </button>
-    </form>
+</form>
 <div class="sub">
-    @for(s of subjs;track s.id){
-    <app-subjectlist [subj]="s"
-    (edit)="editSubject($event)"
-    (delete)="deleteSubject($event)">
-    </app-subjectlist>
-    }
+  @for(s of subjs;track s.id){
+  <app-subjectlist [subj]="s" (edit)="editsubject($event)" (delete)="deleteSubject($event)">
+  </app-subjectlist>
+  }
 </div>

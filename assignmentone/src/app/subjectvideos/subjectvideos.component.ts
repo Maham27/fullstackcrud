@@ -19,84 +19,85 @@ export class SubjectvideosComponent {
   subject: Subj | undefined;
   subjectId!: number;
   videos: subvideos[] = [];
-  editingId: number | undefined| null = null;
+  editingid: number | null = null;
+  selectedfile: File | null = null;
 
-  selectedFile: File | null = null;
-
-  videoForm = new FormGroup({
+  videoform = new FormGroup({
     title: new FormControl('')
   });
 
   ngOnInit() {
     this.subjectId = Number(this.route.snapshot.params['id']);
-    this.loadSubject();
+    this.getsubject();
   }
 
-  loadSubject() {
+  getsubject() {
     if (!this.subjectId) return;
-    this.subjservice.getSubjectById(this.subjectId).subscribe({
-      next: (subjectData) => {
-        this.subject = subjectData;
-        this.getVideos();
+    this.subjservice.getsubjectbyid(this.subjectId).subscribe({
+      next: (data) => {
+        this.subject = data;
+        this.getallvideos();
       },
-      error: (err) => console.error('Error fetching subject:', err)
+      error: (err) => console.error('error', err)
     });
   }
 
-  getVideos() {
+  getallvideos() {
     if (!this.subjectId) return;
-    this.subjservice.getVideosBySubjectId(this.subjectId).subscribe({
+    this.subjservice.getvideosbysubjectid(this.subjectId).subscribe({
       next: (data) => this.videos = data,
-      error: (err) => console.error('Error fetching videos:', err)
+      error: (err) => console.error('error', err)
     });
   }
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+
+  onfileselected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedfile = input.files[0];
+    }
   }
 
   onSubmit() {
-    if (!this.videoForm.valid || !this.subjectId) return;
-
-    const formData = new FormData();
-formData.append('title', this.videoForm.get('title')?.value ?? '');
-    if (this.selectedFile) formData.append('video', this.selectedFile);
-
-    if (this.editingId) {
-  this.subjservice.updateVideo(this.subjectId, this.editingId, formData).subscribe({
-    next: () => {
-      this.videoForm.reset();
-      this.selectedFile = null;
-      this.editingId = null;
-      this.getVideos();
-    },
-    error: (err) => console.error('Error updating video:', err)
-  });
-}
- else {
-      // Create new video
-      this.subjservice.createVideo(this.subjectId, formData).subscribe({
+    if (!this.videoform.valid || !this.subjectId) return;
+    const videodata = new FormData();
+    videodata.append('title', this.videoform.get('title')?.value ?? '');
+    if (this.selectedfile) videodata.append('video', this.selectedfile);
+    if (this.editingid) {
+      this.subjservice.updatevideo(this.subjectId, this.editingid, videodata).subscribe({
         next: () => {
-          this.videoForm.reset();
-          this.selectedFile = null;
-          this.getVideos();
+          this.videoform.reset();
+          this.selectedfile = null;
+          this.editingid = null;
+          this.getallvideos();
         },
-        error: (err) => console.error('Error creating video:', err)
+        error: (err) => console.error('error', err)
+      });
+    }
+    else {
+
+      this.subjservice.createvideo(this.subjectId, videodata).subscribe({
+        next: () => {
+          this.videoform.reset();
+          this.selectedfile = null;
+          this.getallvideos();
+        },
+        error: (err) => console.error('error:', err)
       });
     }
   }
 
-editVideo(video: subvideos) {
-  this.videoForm.patchValue({ title: video.title });
-  this.editingId = video.id;
-  this.selectedFile = null; // agar user file upload nahi kare, existing video rehne do
-}
+  editvideo(video: subvideos) {
+    this.videoform.patchValue({ title: video.title });
+    this.editingid = video.id;
+    this.selectedfile = null;
+  }
 
-  deleteVideo(videoId: number | undefined) {
-    if (!this.subjectId || videoId === undefined) return;
-    this.subjservice.deleteVideo(this.subjectId, videoId).subscribe({
-      next: () => this.getVideos(),
-      error: (err) => console.error('Error deleting video:', err)
+  deleteVideo(videoId: number) {
+    if (!this.subjectId) return;
+    this.subjservice.deletevideo(this.subjectId, videoId).subscribe({
+      next: () => this.getallvideos(),
+      error: (err) => console.error('error', err)
     });
   }
 }

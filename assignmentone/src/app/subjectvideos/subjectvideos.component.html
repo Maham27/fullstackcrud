@@ -1,21 +1,20 @@
-<h3>{{ editingId ? 'Edit Video' : 'Add Video' }} for {{ subject?.name }}</h3>
+<h3>{{ editingid ? 'Edit Video' : 'Add Video' }} for {{ subject?.name }}</h3>
 
-<form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
-  <input type="text" placeholder="Video Title" formControlName="title" required />
-  <input type="file"  (change)="onFileSelected($event)" accept="video/*" [required]="!editingId" />
-  <button type="submit" [disabled]="videoForm.invalid">
-    {{ editingId ? 'Update Video' : 'Add Video' }}
+<form [formGroup]="videoform" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="video name" formControlName="title" required />
+  <input type="file" (change)="onfileselected($event)" accept="video/*" [required]="!editingid" />
+  <button type="submit" [disabled]="videoform.invalid">
+    {{ editingid ? 'Update Video' : 'Add Video' }}
   </button>
 </form>
 
 <ul>
   <li *ngFor="let video of videos">
     <p>{{ video.title }}</p>
-    <video width="320" height="240" controls>
+    <video width="400"  controls>
       <source [src]="'http://localhost:3000' + video.url" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
-    <button (click)="editVideo(video)">Edit</button>
+    <button (click)="editvideo(video)">Edit</button>
     <button (click)="deleteVideo(video.id)">Delete</button>
   </li>
 </ul>

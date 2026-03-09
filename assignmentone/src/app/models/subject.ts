@@ -5,8 +5,8 @@ export interface Subj{
 }
 
 export interface subvideos{
-    id?: number;      
+    id: number;      
   title: string;
   url: string;
-  subjectId?: number;
+  subjectId: number;
 }
