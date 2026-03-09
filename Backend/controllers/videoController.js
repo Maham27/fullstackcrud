@@ -13,7 +13,7 @@ const createvideo = async (req, res) => {
     res.status(201).json(video);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ success: false, message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -27,7 +27,7 @@ const getallvideos = async (req, res) => {
     res.status(200).json(videos);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({message: error.message });
   }
 };
 
@@ -51,7 +51,7 @@ const updatevideo = async (req, res) => {
     res.json(video);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ success: false, message: error.message });
+    res.status(400).json({message: error.message });
   }
 };
 const deletevideo = async (req, res) => {
