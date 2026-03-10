@@ -1,20 +1,29 @@
-<h3>{{ editingid ? 'Edit Video' : 'Add Video' }} for {{ subject?.name }}</h3>
+<h2 class="text-center font-semibold text-4xl my-10">{{ subject?.name }}</h2>
 
-<form [formGroup]="videoform" (ngSubmit)="onSubmit()">
-  <input type="text" placeholder="video name" formControlName="title" required />
-  <input type="file" (change)="onfileselected($event)" accept="video/*" [required]="!editingid" />
-  <button type="submit" [disabled]="videoform.invalid">
-    {{ editingid ? 'Update Video' : 'Add Video' }}
-  </button>
+<form [formGroup]="videoform" (ngSubmit)="onSubmit()"
+  class="max-w-xl mx-auto space-y-4 p-4 bg-white shadow-md rounded-lg">
+  <div class="flex gap-3">
+    <input type="text" placeholder="video name" formControlName="title" required
+      class="w-1/2 p-2 border border-gray-300 rounded" />
+    <input type="file" #filename (change)="onfileselected($event)" accept="video/*" [required]="!editingid"
+      class="w-1/2 p-2 border border-gray-300 rounded mx-1" />
+  </div>
+  <div class="flex justify-center">
+    <button type="submit" [disabled]="videoform.invalid" class="w-1/2 bg-primary disabled:opacity-50">
+      {{ editingid ? 'Update Video' : 'Add Video' }}
+    </button>
+  </div>
 </form>
 
-<ul>
-  <li *ngFor="let video of videos">
-    <p>{{ video.title }}</p>
-    <video width="400"  controls>
-      <source [src]="'http://localhost:3000' + video.url" type="video/mp4">
-    </video>
-    <button (click)="editvideo(video)">Edit</button>
-    <button (click)="deleteVideo(video.id)">Delete</button>
-  </li>
-</ul>
+<div>
+  <ul class="vid mt-10">
+    <li *ngFor="let video of videos">
+      <video width="400" height="320" controls>
+        <source [src]="'http://localhost:3000' + video.url" type="video/mp4">
+      </video>
+      <h5 class="text-xl font-semibold my-4">{{ video.title }}</h5>
+      <button (click)="editvideo(video)" class="m-1 px-4 py-1 bg-primary rounded-lg">Edit</button>
+      <button (click)="deleteVideo(video.id)" class="m-1 px-4 py-1 bg-red-500 rounded-lg">Delete</button>
+    </li>
+  </ul>
+</div>

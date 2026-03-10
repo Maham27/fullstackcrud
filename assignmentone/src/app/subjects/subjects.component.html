@@ -1,9 +1,8 @@
-<h1 class="text-center font-bold text-4xl my-16">SUBJECTS</h1>
-<h2>Create Subject</h2>
-<form [formGroup]="subjectform" (ngSubmit)="onSubmit()">
-  <input placeholder="Name" formControlName="name" />
-  <button type="submit" [disabled]="subjectform.invalid">
-    {{ editingid ? 'Update' : 'Create' }}
+<h1 class="text-center font-bold text-4xl my-10">SUBJECTS</h1>
+<form [formGroup]="subjectform" (ngSubmit)="onSubmit()" class="subj">
+  <input placeholder="Name" formControlName="name" class="border border-gray-300 mx-1 p-2 rounded" />
+  <button type="submit" [disabled]="subjectform.invalid" class="bg-primary disabled:opacity-50">
+    {{ editingid ? 'Update' : 'Add subject' }}
   </button>
 </form>
 <div class="sub">

@@ -1,3 +1,8 @@
+.subj{
+    display:flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 .sub{
     display:flex;
     justify-content: center;

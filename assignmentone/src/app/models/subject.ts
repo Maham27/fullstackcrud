@@ -1,11 +1,11 @@
-export interface Subj{
-    id: number;
+export interface Subj {
+  id: number;
   name: string;
-  subjvid:subvideos[];
+  subjvid: subvideos[];
 }
 
-export interface subvideos{
-    id: number;      
+export interface subvideos {
+  id: number;
   title: string;
   url: string;
   subjectId: number;

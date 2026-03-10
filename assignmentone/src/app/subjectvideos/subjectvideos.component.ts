@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subj, subvideos } from '../models/subject';
 import { ServicedataService } from '../core/services/servicedata.service';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-subjectvideos',
@@ -21,9 +22,10 @@ export class SubjectvideosComponent {
   videos: subvideos[] = [];
   editingid: number | null = null;
   selectedfile: File | null = null;
+  @ViewChild('filename') filename!: ElementRef<HTMLInputElement>;
 
   videoform = new FormGroup({
-    title: new FormControl('')
+    title: new FormControl('', Validators.required)
   });
 
   ngOnInit() {
@@ -60,6 +62,11 @@ export class SubjectvideosComponent {
 
   onSubmit() {
     if (!this.videoform.valid || !this.subjectId) return;
+    if (!this.selectedfile && !this.editingid) {
+      alert("Please upload a video file");
+      return;
+    }
+
     const videodata = new FormData();
     videodata.append('title', this.videoform.get('title')?.value ?? '');
     if (this.selectedfile) videodata.append('video', this.selectedfile);
@@ -80,6 +87,7 @@ export class SubjectvideosComponent {
         next: () => {
           this.videoform.reset();
           this.selectedfile = null;
+          this.filename.nativeElement.value = '';
           this.getallvideos();
         },
         error: (err) => console.error('error:', err)

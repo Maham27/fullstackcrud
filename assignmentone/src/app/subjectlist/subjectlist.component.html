@@ -1,10 +1,15 @@
-<div class="text-center shadow-lg bg-gray-100 rounded-lg px-6 py-12 w-72 mx-10 my-6">
-  <h5 class="text-xl font-semibold mb-8">{{subj.name}}</h5>
-  <div>
-    <button (click)="onedit()" class="bg-yellow-500 px-2 py-1 rounded mr-2">Edit</button>
-    <button (click)="ondelete()" class="bg-red-500 px-2 py-1 rounded">Delete</button>
+<div class="flex flex-col items-center">
+
+  <div class="text-center shadow-lg bg-gray-100 rounded-lg px-6 py-12 w-72 mx-3 my-6 border border-primary border-2">
+    <h5 class="text-xl font-semibold mb-8">{{subj.name}}</h5>
+    <a [routerLink]="['/subject', subj.id]" class="bg-primary text-white p-2 rounded-lg">
+      Watch Videos
+    </a>
   </div>
-  <a [routerLink]="['/subject', subj.id]" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
-    Watch Videos
-  </a>
+
+  <div class="flex justify-center">
+    <button (click)="onedit()" class="m-1 px-4 py-1 bg-primary text-white rounded-lg">Edit</button>
+    <button (click)="ondelete()" class="m-1 px-4 py-1 bg-red-500 text-white rounded-lg">Delete</button>
+  </div>
+
 </div>

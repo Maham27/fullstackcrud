@@ -27,7 +27,7 @@ const getallvideos = async (req, res) => {
     res.status(200).json(videos);
   } catch (err) {
     console.error(err);
-    res.status(500).json({message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -51,7 +51,7 @@ const updatevideo = async (req, res) => {
     res.json(video);
   } catch (err) {
     console.error(err);
-    res.status(400).json({message: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 const deletevideo = async (req, res) => {

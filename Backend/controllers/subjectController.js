@@ -27,7 +27,7 @@ const getsubjectbyid = async (req, res) => {
       include: [{ model: Video, as: "videos" }]
     });
     if (!subject) {
-      return res.status(404).json({ message:"subject not found" });
+      return res.status(404).json({ message: "subject not found" });
     }
     res.status(200).json(subject);
   } catch (err) {
@@ -41,7 +41,7 @@ const updatesubject = async (req, res) => {
     const { name } = req.body;
     const subject = await Subject.findByPk(id);
     if (!subject) {
-      return res.status(404).json({ message:"subject not found" });
+      return res.status(404).json({ message: "subject not found" });
     }
     await subject.update({ name });
     res.status(200).json(subject);
@@ -56,7 +56,7 @@ const deletesubject = async (req, res) => {
     const { id } = req.params;
     const subject = await Subject.findByPk(id);
     if (!subject) {
-      return res.status(404).json({ message:"subject not found" });
+      return res.status(404).json({ message: "subject not found" });
     }
     await subject.destroy();
     res.status(200).json({ message: "subject deleted" });
@@ -66,4 +66,4 @@ const deletesubject = async (req, res) => {
   }
 };
 
-module.exports = {createsubject,getallsubjects,getsubjectbyid,updatesubject,deletesubject};
+module.exports = { createsubject, getallsubjects, getsubjectbyid, updatesubject, deletesubject };

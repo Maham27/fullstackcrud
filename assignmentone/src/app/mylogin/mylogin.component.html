@@ -6,7 +6,7 @@
         <label class="font-medium">Email</label>
         <input type="email" formControlName="email" placeholder="Enter your email"
           class="w-full border p-2 rounded-lg" />
-      @if (person.get('email')?.touched) {
+        @if (person.get('email')?.touched) {
         @if (person.get('email')?.hasError('required')) {
         <p class="text-red-700 text-sm">email is required</p>
         }

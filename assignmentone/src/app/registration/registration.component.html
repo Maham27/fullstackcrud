@@ -3,9 +3,28 @@
     <h3 class="text-xl font-bold">Registration</h3>
     <form [formGroup]="user" (ngSubmit)="onSubmit()" class="space-y-4 text-left">
       <div>
-        <label class="font-medium">Email</label>
-        <input type="email" formControlName="email" placeholder="Enter your email"
+        <label class="font-medium">First Name</label>
+        <input type="text" formControlName="firstname" placeholder="Enter your first name"
           class="w-full border p-2 rounded" />
+        @if(user.get('firstname')?.touched){
+        @if (user.get('firstname')?.hasError('required')) {
+        <p class="text-red-700 text-sm">first name is required</p>
+        }
+        }
+      </div>
+      <div>
+        <label class="font-medium">lastt Name</label>
+        <input type="text" formControlName="lastname" placeholder="Enter your last name"
+          class="w-full border p-2 rounded" />
+        @if(user.get('lastname')?.touched){
+        @if (user.get('lastname')?.hasError('required')) {
+        <p class="text-red-700 text-sm">last name is required</p>
+        }
+        }
+      </div>
+      <div>
+        <label class="font-medium">Email</label>
+        <input type="email" formControlName="email" placeholder="Enter your email" class="w-full border p-2 rounded" />
         @if (user.get('email')?.touched) {
         @if (user.get('email')?.hasError('required')) {
         <p class="text-red-700 text-sm">email is required</p>

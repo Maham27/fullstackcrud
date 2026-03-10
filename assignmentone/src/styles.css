@@ -1,1 +1,49 @@
 @import "tailwindcss";
+
+@theme {
+
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --font-accent: 'Sacramento', cursive;
+  --color-primary: #1E3A8A;
+  --color-secondary: #10B981;
+  --color-bg: #F5FBFF;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6B7280;
+}
+
+body {
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+p {
+  font-family: var(--font-body);
+  color: var(--color-primary);
+}
+
+button {
+  font-family: var(--font-body);
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}

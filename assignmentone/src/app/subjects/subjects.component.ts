@@ -4,7 +4,7 @@ import { ServicedataService } from '../core/services/servicedata.service';
 import { inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubjectlistComponent } from '../subjectlist/subjectlist.component';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-subjects',
   standalone: true,
@@ -15,7 +15,7 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 export class SubjectsComponent {
 
   subjectform = new FormGroup({
-    name: new FormControl('')
+    name: new FormControl('', Validators.required)
   });
 
   subjs: Subj[] = [];

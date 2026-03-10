@@ -1,4 +1,6 @@
-.vid{
+.vid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
+  text-align: center;
 }

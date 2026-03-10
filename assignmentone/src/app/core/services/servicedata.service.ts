@@ -32,20 +32,20 @@ export class ServicedataService {
   }
 
   createvideo(subjectId: number, video: FormData): Observable<any> {
-  const url = `${this.apiUrl}/${subjectId}/videos`;
-  return this.http.post(url, video);  // FormData directly post karenge
-}
+    const url = `${this.apiUrl}/${subjectId}/videos`;
+    return this.http.post(url, video);  // FormData directly post karenge
+  }
 
   getvideosbysubjectid(subjectId: number): Observable<any[]> {
     const url = `${this.apiUrl}/${subjectId}/videos`;
     return this.http.get<any[]>(url);
   }
-  
- updatevideo(subjectId: number, videoId: number, video: FormData): Observable<any> {
-  const url = `${this.apiUrl}/${subjectId}/videos/${videoId}`;
-  return this.http.put(url, video); 
-}
- 
+
+  updatevideo(subjectId: number, videoId: number, video: FormData): Observable<any> {
+    const url = `${this.apiUrl}/${subjectId}/videos/${videoId}`;
+    return this.http.put(url, video);
+  }
+
   deletevideo(subjectId: number, videoId: number): Observable<void> {
     const url = `${this.apiUrl}/${subjectId}/videos/${videoId}`;
     return this.http.delete<void>(url);
