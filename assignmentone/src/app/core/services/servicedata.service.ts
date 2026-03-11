@@ -33,7 +33,7 @@ export class ServicedataService {
 
   createvideo(subjectId: number, video: FormData): Observable<any> {
     const url = `${this.apiUrl}/${subjectId}/videos`;
-    return this.http.post(url, video);  // FormData directly post karenge
+    return this.http.post(url, video);  
   }
 
   getvideosbysubjectid(subjectId: number): Observable<any[]> {
